@@ -1,0 +1,125 @@
+{
+  "version": "1.186.0",
+  "results": [
+    {
+      "check_id": "labs.02-sql-injection.rules.node-sql-template-interpolation",
+      "path": "labs/02-sql-injection/tests/fixtures/unsafe-01.js",
+      "start": {
+        "line": 5,
+        "col": 3,
+        "offset": 107
+      },
+      "end": {
+        "line": 8,
+        "col": 3,
+        "offset": 188
+      },
+      "extra": {
+        "message": "SQL query constructed using JavaScript template interpolation. Review whether untrusted input can alter SQL syntax. Use parameterized queries instead of interpolating values into SQL.",
+        "metadata": {
+          "category": "security",
+          "technology": [
+            "nodejs",
+            "sqlite"
+          ],
+          "cwe": [
+            "CWE-89: SQL Injection"
+          ],
+          "owasp": [
+            "A03:2021 - Injection"
+          ],
+          "confidence": "MEDIUM"
+        },
+        "severity": "ERROR",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    }
+  ],
+  "errors": [],
+  "paths": {
+    "scanned": [
+      "labs/02-sql-injection/tests/fixtures/benign-01.js",
+      "labs/02-sql-injection/tests/fixtures/benign-02.js",
+      "labs/02-sql-injection/tests/fixtures/benign-03.js",
+      "labs/02-sql-injection/tests/fixtures/unsafe-01.js",
+      "labs/02-sql-injection/tests/fixtures/unsafe-02.js",
+      "labs/02-sql-injection/tests/fixtures/unsafe-03.js"
+    ]
+  },
+  "time": {
+    "rules": [],
+    "rules_parse_time": 0.0006909370422363281,
+    "profiling_times": {
+      "config_time": 0.1180734634399414,
+      "core_time": 0.22162270545959473,
+      "ignores_time": 5.793571472167969e-05,
+      "total_time": 0.34808921813964844
+    },
+    "parsing_time": {
+      "total_time": 0.050393104553222656,
+      "per_file_time": {
+        "mean": 0.008398850758870443,
+        "std_dev": 0.0001278431103186348
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_files": []
+    },
+    "scanning_time": {
+      "total_time": 0.07525634765625,
+      "per_file_time": {
+        "mean": 0.012542724609375,
+        "std_dev": 0.00028841845088815415
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_files": []
+    },
+    "matching_time": {
+      "total_time": 0.018537044525146484,
+      "per_file_and_rule_time": {
+        "mean": 0.003089507420857747,
+        "std_dev": 1.897352305806837e-05
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_rules_on_files": []
+    },
+    "tainting_time": {
+      "total_time": 0.0,
+      "per_def_and_rule_time": {
+        "mean": 0.0,
+        "std_dev": 0.0
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_rules_on_defs": []
+    },
+    "fixpoint_timeouts": [],
+    "prefiltering": {
+      "project_level_time": 0.0,
+      "file_level_time": 0.0,
+      "rules_with_project_prefilters_ratio": 0.0,
+      "rules_with_file_prefilters_ratio": 0.0,
+      "rules_selected_ratio": 1.0,
+      "rules_matched_ratio": 1.0
+    },
+    "targets": [],
+    "total_bytes": 0,
+    "max_memory_bytes": 94992320
+  },
+  "engine_requested": "OSS",
+  "skipped_rules": [],
+  "profiling_results": []
+}

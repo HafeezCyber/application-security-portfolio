@@ -1,0 +1,58 @@
+{
+  "lab": "02-sql-injection",
+  "evaluation": "Refined Semgrep detection rule",
+  "rule": "node-sql-dynamic-query",
+  "fixtureCount": 6,
+  "metrics": {
+    "truePositives": 3,
+    "falseNegatives": 0,
+    "falsePositives": 0,
+    "trueNegatives": 3,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  "fixtures": [
+    {
+      "fixture": "unsafe-01.js",
+      "expectedUnsafe": true,
+      "detected": true,
+      "classification": "TP"
+    },
+    {
+      "fixture": "unsafe-02.js",
+      "expectedUnsafe": true,
+      "detected": true,
+      "classification": "TP"
+    },
+    {
+      "fixture": "unsafe-03.js",
+      "expectedUnsafe": true,
+      "detected": true,
+      "classification": "TP"
+    },
+    {
+      "fixture": "benign-01.js",
+      "expectedUnsafe": false,
+      "detected": false,
+      "classification": "TN"
+    },
+    {
+      "fixture": "benign-02.js",
+      "expectedUnsafe": false,
+      "detected": false,
+      "classification": "TN"
+    },
+    {
+      "fixture": "benign-03.js",
+      "expectedUnsafe": false,
+      "detected": false,
+      "classification": "TN"
+    }
+  ],
+  "limitations": [
+    "Six synthetic JavaScript fixtures only",
+    "Targeted database.prepare() patterns",
+    "Not comprehensive interprocedural taint analysis",
+    "Does not establish general-world detection accuracy"
+  ]
+}

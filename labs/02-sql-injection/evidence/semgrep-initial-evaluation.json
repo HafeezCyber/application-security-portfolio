@@ -1,0 +1,57 @@
+{
+  "lab": "02-sql-injection",
+  "evaluation": "Initial custom Semgrep rule",
+  "rule": "node-sql-template-interpolation",
+  "fixtureCount": 6,
+  "metrics": {
+    "truePositives": 1,
+    "falseNegatives": 2,
+    "falsePositives": 0,
+    "trueNegatives": 3,
+    "precision": 1.0,
+    "recall": 0.3333333333333333
+  },
+  "fixtures": [
+    {
+      "fixture": "unsafe-01.js",
+      "expectedUnsafe": true,
+      "detected": true,
+      "classification": "TP"
+    },
+    {
+      "fixture": "unsafe-02.js",
+      "expectedUnsafe": true,
+      "detected": false,
+      "classification": "FN"
+    },
+    {
+      "fixture": "unsafe-03.js",
+      "expectedUnsafe": true,
+      "detected": false,
+      "classification": "FN"
+    },
+    {
+      "fixture": "benign-01.js",
+      "expectedUnsafe": false,
+      "detected": false,
+      "classification": "TN"
+    },
+    {
+      "fixture": "benign-02.js",
+      "expectedUnsafe": false,
+      "detected": false,
+      "classification": "TN"
+    },
+    {
+      "fixture": "benign-03.js",
+      "expectedUnsafe": false,
+      "detected": false,
+      "classification": "TN"
+    }
+  ],
+  "limitations": [
+    "Small synthetic fixture set",
+    "Results do not establish general detection accuracy",
+    "Additional SQL construction patterns remain untested"
+  ]
+}

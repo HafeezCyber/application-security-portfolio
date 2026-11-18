@@ -1,0 +1,29 @@
+rules:
+  - id: node-sql-template-interpolation
+    languages:
+      - javascript
+    severity: ERROR
+    message: >-
+      SQL query constructed using JavaScript template
+      interpolation. Review whether untrusted input
+      can alter SQL syntax. Use parameterized queries
+      instead of interpolating values into SQL.
+    metadata:
+      category: security
+      technology:
+        - nodejs
+        - sqlite
+      cwe:
+        - "CWE-89: SQL Injection"
+      owasp:
+        - "A03:2021 - Injection"
+      confidence: MEDIUM
+    patterns:
+      - pattern: |
+          const $QUERY = `...${$INPUT}...`;
+      - metavariable-regex:
+          metavariable: $QUERY
+          regex: (?i).*(query|sql|statement).*
+      - metavariable-regex:
+          metavariable: $INPUT
+          regex: .+

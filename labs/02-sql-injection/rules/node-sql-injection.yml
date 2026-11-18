@@ -1,0 +1,30 @@
+rules:
+  - id: node-sql-dynamic-query
+    languages:
+      - javascript
+    severity: ERROR
+    message: >-
+      SQL statement is constructed using dynamic
+      JavaScript values before being passed to
+      database.prepare(). Review for SQL injection
+      and use parameterized queries.
+    metadata:
+      category: security
+      technology:
+        - nodejs
+        - sqlite
+      cwe:
+        - "CWE-89: SQL Injection"
+      owasp:
+        - "A03:2021 - Injection"
+      confidence: MEDIUM
+    patterns:
+      - pattern-either:
+          - pattern: |
+              const $QUERY = `...${$INPUT}...`;
+              ...
+              $DB.prepare($QUERY)
+          - pattern: |
+              const $QUERY = $LEFT + $INPUT + $RIGHT;
+              ...
+              $DB.prepare($QUERY)
