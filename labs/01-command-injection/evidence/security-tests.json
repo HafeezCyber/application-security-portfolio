@@ -1,0 +1,12 @@
+{
+  "tool": "Node.js built-in test runner",
+  "reporter": "tap",
+  "source_evidence": "security-tests.tap",
+  "total_tests": 17,
+  "passed": 17,
+  "failed": 0,
+  "cancelled": 0,
+  "skipped": 0,
+  "todo": 0,
+  "verified": true
+}

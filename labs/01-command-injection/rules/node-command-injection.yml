@@ -1,0 +1,84 @@
+rules:
+  - id: node-dynamic-shell-command
+    languages:
+      - javascript
+    severity: ERROR
+    message: >-
+      Potential OS command injection through dynamically constructed
+      shell commands or shell-enabled subprocess execution.
+      Validate input provenance and avoid shell interpretation.
+    metadata:
+      category: security
+      confidence: MEDIUM
+      cwe:
+        - "CWE-78: OS Command Injection"
+      owasp:
+        - "A03:2021 - Injection"
+    patterns:
+      - pattern-either:
+          - pattern: |
+              const $CMD = `...${$INPUT}...`;
+              ...
+              exec($CMD, ...);
+          - pattern: |
+              let $CMD = `...${$INPUT}...`;
+              ...
+              exec($CMD, ...);
+          - pattern: exec(`...${$INPUT}...`, ...)
+          - patterns:
+              - pattern: exec($LEFT + $RIGHT, ...)
+              - pattern-not: exec("..." + "...", ...)
+          - patterns:
+              - pattern: |
+                  const $CMD = $LEFT + $RIGHT;
+                  ...
+                  exec($CMD, ...);
+              - pattern-not: |
+                  const $CMD = "..." + "...";
+                  ...
+                  exec($CMD, ...);
+          - patterns:
+              - pattern: |
+                  let $CMD = $LEFT + $RIGHT;
+                  ...
+                  exec($CMD, ...);
+              - pattern-not: |
+                  let $CMD = "..." + "...";
+                  ...
+                  exec($CMD, ...);
+          - pattern: 'execFile($BIN, $ARGS, {shell: true}, ...)'
+          - pattern: 'execFile($BIN, $ARGS, {shell: true, ...}, ...)'
+
+  - id: node-shell-execution-review
+    languages:
+      - javascript
+    severity: INFO
+    message: >-
+      Shell command execution detected. Review whether command content
+      can be influenced by untrusted input. This finding does not
+      establish command injection.
+    metadata:
+      category: security
+      confidence: LOW
+      review_required: true
+    patterns:
+      - pattern: exec($COMMAND, ...)
+      - pattern-not: exec("...", ...)
+      - pattern-not: exec(`...${$INPUT}...`, ...)
+      - pattern-not: exec($LEFT + $RIGHT, ...)
+      - pattern-not-inside: |
+          const $CMD = `...${$INPUT}...`;
+          ...
+          exec($CMD, ...);
+      - pattern-not-inside: |
+          let $CMD = `...${$INPUT}...`;
+          ...
+          exec($CMD, ...);
+      - pattern-not-inside: |
+          const $CMD = $LEFT + $RIGHT;
+          ...
+          exec($CMD, ...);
+      - pattern-not-inside: |
+          let $CMD = $LEFT + $RIGHT;
+          ...
+          exec($CMD, ...);
